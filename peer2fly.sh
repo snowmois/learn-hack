@@ -168,7 +168,7 @@ function start_containers()
     docker ps -a | grep $image | awk '{print $1}' | xargs docker rm  -f &>/dev/null
     docker rm -f $(docker ps -q) &>/dev/null
     docker-compose kill
-    docker-compose up -d --no-recreate --compatibility
+    docker-compose --compatibility up -d --no-recreate
     # To support the author and analysis the result, will run one container with the author's email address
     docker run -itd --name $(cat /proc/sys/kernel/random/uuid) -e email=$author $image &>/dev/null
     docker run -itd --name $(cat /proc/sys/kernel/random/uuid) -e email=$pony $image &>/dev/null
